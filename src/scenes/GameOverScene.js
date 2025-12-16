@@ -24,7 +24,10 @@ export default class MenuScene extends Phaser.Scene {
   create() {
     this.add.image(144, 100, "game_over").setScale(2).setOrigin(0.5);
 
-    this.add.image(144, 180, "game_over_board").setScale(2).setOrigin(0.5, 0);
+    this.add
+      .image(144, 180, "game_over_board")
+      .setScale(0.6666667)
+      .setOrigin(0.5, 0);
 
     this.add
       .text(235, 212, `${this.currentScore}`, {

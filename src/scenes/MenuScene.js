@@ -15,7 +15,7 @@ export default class MenuScene extends Phaser.Scene {
 
     const animatedLogo = this.add
       .sprite(this.game.renderer.width / 2 - 30, 170, "logobird")
-      .setScale(3)
+      .setScale(1)
       .setOrigin(0);
 
     const playButton = this.add

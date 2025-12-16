@@ -18,7 +18,7 @@ export default class MenuScene extends Phaser.Scene {
 
     this.hit_sound = this.sound.add("hit_sound");
 
-    this.bird = this.physics.add.sprite(50, 100, "bird").setScale(2);
+    this.bird = this.physics.add.sprite(50, 100, "bird").setScale(0.6666667);
 
     this.bird.setGravityY(1000);
 
