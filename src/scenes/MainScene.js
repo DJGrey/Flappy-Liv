@@ -1,8 +1,8 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
 export default class MenuScene extends Phaser.Scene {
   constructor() {
-    super({ key: 'MainScene' });
+    super({ key: "MainScene" });
   }
 
   init() {
@@ -10,26 +10,26 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(0, 0, 'background').setOrigin(0).setScale(2);
+    this.add.image(0, 0, "background").setOrigin(0).setScale(2);
 
-    this.wing_sound = this.sound.add('wing_sound');
+    this.wing_sound = this.sound.add("wing_sound");
 
-    this.point_sound = this.sound.add('point_sound');
+    this.point_sound = this.sound.add("point_sound");
 
-    this.hit_sound = this.sound.add('hit_sound');
+    this.hit_sound = this.sound.add("hit_sound");
 
-    this.bird = this.physics.add.sprite(50, 100, 'bird').setScale(2);
+    this.bird = this.physics.add.sprite(50, 100, "bird").setScale(2);
 
     this.bird.setGravityY(1000);
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-    this.cursorKeys.space.on('down', () => {
+    this.cursorKeys.space.on("down", () => {
       this.fly();
     });
 
     this.time.addEvent({
-      delay: 1500,
+      delay: 1200,
       callback: this.addTubes,
       callbackScope: this,
       loop: true,
@@ -41,36 +41,31 @@ export default class MenuScene extends Phaser.Scene {
 
     this.physics.add.overlap(this.bird, this.gates, this.increaseScore);
 
-    this.labelScore = this.add.text(
-      this.game.renderer.width / 2,
-      50,
-      '0',
-      {
-        font: '25px Sans-serif',
-        fill: '#ffffff',
-        shadow: {
-          offsetX: 0,
-          offsetY: 0,
-          color: '#000',
-          blur: 3,
-          stroke: false,
-          fill: true,
-        },
+    this.labelScore = this.add.text(this.game.renderer.width / 2, 50, "0", {
+      font: "25px Sans-serif",
+      fill: "#ffffff",
+      shadow: {
+        offsetX: 0,
+        offsetY: 0,
+        color: "#000",
+        blur: 3,
+        stroke: false,
+        fill: true,
       },
-    );
+    });
 
     this.labelScore.setDepth(2);
 
     this.physics.add.overlap(this.bird, this.tubes, this.hitTube, null, this);
 
     // Fly if the user clicks on the screen.
-    this.input.on('pointerdown', this.fly, this);
+    this.input.on("pointerdown", this.fly, this);
 
     this.anims.create({
-      key: 'fly',
+      key: "fly",
       frameRate: 3,
       repeat: 0,
-      frames: this.anims.generateFrameNumbers('bird', {
+      frames: this.anims.generateFrameNumbers("bird", {
         frames: [0, 1, 2],
       }),
     });
@@ -79,7 +74,7 @@ export default class MenuScene extends Phaser.Scene {
   update() {
     if (this.bird.y < 0 || this.bird.y > 512) {
       this.gameOver();
-      this.sound.add('die_sound').play();
+      this.sound.add("die_sound").play();
     }
 
     if (this.bird.angle < 30) {
@@ -107,17 +102,20 @@ export default class MenuScene extends Phaser.Scene {
     this.tweens.add({
       targets: this.bird,
       angle: -30,
-      ease: 'Linear',
+      ease: "Linear",
       duration: 100,
       repeat: 0,
       yoyo: false,
     });
 
-    this.bird.play('fly');
+    this.bird.play("fly");
   }
 
   addTopTube(x, y) {
-    const topPipe = this.physics.add.sprite(x, y, 'top_tube').setScale(2).setOrigin(0, 1);
+    const topPipe = this.physics.add
+      .sprite(x, y, "top_tube")
+      .setScale(2)
+      .setOrigin(0, 1);
 
     this.tubes.add(topPipe);
 
@@ -125,7 +123,10 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   addBottomTube(x, y) {
-    const bottomPipe = this.physics.add.sprite(x, y, 'bottom_tube').setScale(2).setOrigin(0, 0);
+    const bottomPipe = this.physics.add
+      .sprite(x, y, "bottom_tube")
+      .setScale(2)
+      .setOrigin(0, 0);
 
     this.tubes.add(bottomPipe);
 
@@ -156,6 +157,10 @@ export default class MenuScene extends Phaser.Scene {
 
   gameOver() {
     this.scene.pause();
-    this.scene.launch('GameOverScene', { prev: this.scene, currentScore: this.score });
+    this.labelScore.setVisible(false);
+    this.scene.launch("GameOverScene", {
+      prev: this.scene,
+      currentScore: this.score,
+    });
   }
 }

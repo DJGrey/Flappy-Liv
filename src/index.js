@@ -3,7 +3,6 @@ import LoadScene from './scenes/LoadScene';
 import MenuScene from './scenes/MenuScene';
 import MainScene from './scenes/MainScene';
 import GameOverScene from './scenes/GameOverScene';
-import LeaderBoardScene from './scenes/LeaderBoardScene';
 import './style.scss';
 
 const config = {
@@ -24,7 +23,6 @@ const config = {
     MenuScene,
     MainScene,
     GameOverScene,
-    LeaderBoardScene,
   ],
 };
 
