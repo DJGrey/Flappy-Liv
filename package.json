@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "webpack --watch",
-    "build": "webpack --mode=production",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode=production",
     "server": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --open"
   },
   "repository": {
